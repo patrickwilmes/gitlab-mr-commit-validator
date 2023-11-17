@@ -34,7 +34,7 @@ func main() {
 		fmt.Println("----")
 		for _, commit := range commits {
 			if commit.IsValidCommit() != nil {
-				panic("Invalid commit detected!")
+				fmt.Printf("Invalid commit detected! %d\n", id.IID)
 			}
 		}
 		fmt.Println("----")
