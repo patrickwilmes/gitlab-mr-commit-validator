@@ -3,6 +3,7 @@ package internal
 import (
 	"errors"
 	"regexp"
+	"strconv"
 	"strings"
 )
 
@@ -45,4 +46,9 @@ func (commit *Commit) IsValidTitle() error {
 		return InvalidTitleError
 	}
 	return nil
+}
+
+func FetchCommitsForMergeRequest(mrIID int, token string) (commits []Commit, err error) {
+	err = GetJson("https://gitlab.com/api/v4/projects/26177235/merge_requests/"+strconv.Itoa(mrIID)+"/commits?state=opened&access_token="+token, &commits)
+	return commits, err
 }
